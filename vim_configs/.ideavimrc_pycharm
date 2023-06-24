@@ -30,8 +30,8 @@ noremap <c-t> :action ActivateTerminalToolWindow<CR>
 noremap <TAB> :action PreviousTab<CR>
 noremap <A-h> :action PreviousSplitter<CR>
 noremap <A-l> :action NextSplitter<CR>
-noremap <S-j> :action MethodUp<CR>
-noremap <S-k> :action MethodDown<CR>
+noremap <S-k> :action MethodUp<CR>
+noremap <S-j> :action MethodDown<CR>
 noremap \e :e ~/.ideavimrc<CR>
 noremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
