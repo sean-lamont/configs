@@ -1,0 +1,41 @@
+map <Enter> o<ESC>
+map <S-Enter> O<ESC>
+:imap jk <ESC>
+set relativenumber number
+
+# easymotion plugin config
+Plug 'easymotion/vim-easymotion'
+let mapleader=","
+set easymotion
+map <Leader> <Plug>(easymotion-prefix)
+
+# quickscope plugin config
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+# pycharm action remaps
+sethandler <c-r> a:vim
+noremap <c-z> :action ToggleDistractionFreeMode<CR>
+noremap <c-r> :action RecentFiles<CR>
+noremap <c-a> :action GotoAction<CR>
+noremap <c-x> :action HideAllWindows<CR>
+noremap <c-s> :action FileStructurePopup<CR>
+noremap <c-p> :action JumpToLastWindow<CR>
+noremap <c-\> :action SplitVertically<CR>
+noremap <c--> :action SplitHorizontally<CR>
+noremap <c-t> :action ActivateTerminalToolWindow<CR>
+noremap <TAB> :action PreviousTab<CR>
+noremap <A-h> :action PreviousSplitter<CR>
+noremap <A-l> :action NextSplitter<CR>
+noremap <S-j> :action MethodUp<CR>
+noremap <S-k> :action MethodDown<CR>
+noremap \e :e ~/.ideavimrc<CR>
+noremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+
+#noremap <> :action Vcs.UpdateProject<CR>
+#noremap <> :action HideActiveWindow<CR>
+
