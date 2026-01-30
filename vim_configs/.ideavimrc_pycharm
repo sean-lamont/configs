@@ -3,37 +3,49 @@ map <Enter> o<ESC>
 map <S-Enter> O<ESC>
 :imap jk <ESC>
 set relativenumber number
+set incsearch
+
 let mapleader=" "
 
 " Enable NERDTree
 set NERDTree
 
+"" Press `f` to activate AceJump
+"map f <Action>(AceAction)
+"" Press `F` to activate Target Mode
+"map F <Action>(AceTargetAction)
+
 " Enable surround
 Plug 'tpope/vim-surround'
 
-
-
 " easymotion plugin config
-Plug 'easymotion/vim-easymotion'
-set easymotion
-map <Leader> <Plug>(easymotion-prefix)
+"Plug 'easymotion/vim-easymotion'
+"set easymotion
+"map <Leader> <Plug>(easymotion-prefix)
+"map <Leader> <Plug>(easymotion-s2)
 "map <Leader>F <Plug>(easymotion-s)
 "map <Leader>f <Plug>(easymotion-f)
+"nmap <Leader>s <Plug>(easymotion-s2)
 
-" quickscope plugin config
-set quickscope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+"" quickscope plugin config
+"set quickscope
+"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 set clipboard+=unnamed
 set clipboard+=ideaput
 
 " pycharm action remaps
 sethandler <c-r> a:vim
+sethandler <c-f> a:vim
 noremap <c-z> :action ToggleDistractionFreeMode<CR>
 noremap <c-a> :action GotoAction<CR>
 noremap <c-x> :action HideAllWindows<CR>
 noremap <c-s> :action FileStructurePopup<CR>
 noremap <c-p> :action JumpToLastWindow<CR>
+
+" This maps Escape to run :nohlsearch and then return to normal mode
+nnoremap <Esc> :nohlsearch<CR>
 
 noremap <c-\> :action SplitVertically<CR>
 noremap <c--> :action SplitHorizontally<CR>
@@ -85,12 +97,11 @@ nnoremap gE :action GotoPreviousError<CR>
 set incsearch
 "nnoremap <c-/> :action FindInPath<CR>
 nnoremap <c-a> :action GotoAction<CR>
-nnoremap <c-f> :action GotoFile<CR>
+"nnoremap <c-f> :action GotoFile<CR>
 nnoremap <leader>u :action FindUsages<CR>
 nnoremap <leader>s :action GotoRelated<CR>
 nnoremap <leader>h :action CallHierarchy<CR>
 nnoremap <leader>c :action ShowNavBar<CR>
-nnoremap <c-s> :action FileStructurePopup<CR>
 "nnoremap <c-o> :action GotoSymbol<CR>
 nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
@@ -113,10 +124,20 @@ nnoremap ,b :action ToggleLineBreakpoint<CR>
 nnoremap ,d :action ContextDebug<CR>
 nnoremap ,n :action ActivateDebugToolWindow<CR>
 
-noremap \e :e ~/.ideavimrc<CR>
+noremap \s :e ~/.ideavimrc<CR>
 noremap \r :action IdeaVim.ReloadVimRc.reload<CR>
-
 
 "noremap <> :action Vcs.UpdateProject<CR>
 "noremap <> :action HideActiveWindow<CR>
+
+" specific timeout settings to fix remote latency issues
+set timeoutlen=1000
+set ttimeoutlen=10
+
+noremap <C-d> 10j
+noremap <C-u> 10k
+
+nnoremap <C-e> 10<C-e>
+nnoremap <C-y> 10<C-y>
+
 
