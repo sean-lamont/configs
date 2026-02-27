@@ -37,15 +37,17 @@ elif [ "$(uname)" == "Linux" ]; then
     wget -qO /tmp/JetBrainsMono.zip "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
     unzip -qo /tmp/JetBrainsMono.zip -d ~/.local/share/fonts/
     fc-cache -fv
-    rm /tmp/JetBrainsMono.zip
+    rm -f /tmp/JetBrainsMono.zip
 
     # --- 3. Configure GNOME Terminal ---
     echo "Applying font to GNOME Terminal..."
-    PROFILE=$(dconf read /org/gnome/terminal/legacy/profiles:/default | tr -d \')
+    PROFILE=$(dconf read /org/gnome/terminal/legacy/profiles:/default 2>/dev/null | tr -d \')
     if [ -n "$PROFILE" ]; then
         dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE/use-system-font false
         dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE/font "'JetBrainsMono Nerd Font 12'"
         echo "GNOME Terminal successfully updated!"
+    else
+        echo "Could not find default GNOME Terminal profile. You may need to set the font manually."
     fi
 fi
 
@@ -57,12 +59,27 @@ if ! grep -q "# --- Tmux & Conda Auto-Setup ---" "$RC_FILE"; then
     cat << 'EOF' >> "$RC_FILE"
 
 # --- Tmux & Conda Auto-Setup ---
-# 1. Auto-restore active Conda environment in new Tmux panes
-if command -v conda &> /dev/null && [ -n "$CONDA_DEFAULT_ENV" ] && [ "$CONDA_DEFAULT_ENV" != "base" ]; then
-    conda activate "$CONDA_DEFAULT_ENV"
+# 1. If we are INSIDE Tmux, set up the environment sync
+if [ -n "$TMUX" ]; then
+
+    # A. Every time the prompt appears, tell Tmux which Conda env we are in
+    if [ -n "$BASH_VERSION" ]; then
+        PROMPT_COMMAND="tmux set-env TMUX_CONDA_ENV \"\$CONDA_DEFAULT_ENV\" 2>/dev/null; ${PROMPT_COMMAND:-}"
+    elif [ -n "$ZSH_VERSION" ]; then
+        precmd() { tmux set-env TMUX_CONDA_ENV "$CONDA_DEFAULT_ENV" 2>/dev/null; }
+    fi
+
+    # B. When a new pane boots up, ask Tmux what the last used environment was
+    SAVED_ENV=$(tmux show-env TMUX_CONDA_ENV 2>/dev/null | cut -d= -f2)
+
+    # C. If a custom environment was saved, activate it instantly
+    if command -v conda &> /dev/null && [ -n "$SAVED_ENV" ] && [ "$SAVED_ENV" != "base" ]; then
+        eval "$(conda shell.$(basename $SHELL) hook)"
+        conda activate "$SAVED_ENV"
+    fi
 fi
 
-# 2. Auto-start Tmux (only in interactive shells, and not inside an existing Tmux)
+# 2. If we are OUTSIDE Tmux, auto-start a session (and don't loop!)
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ]; then
     exec tmux new-session -A -s main
 fi
@@ -73,6 +90,6 @@ else
 fi
 
 echo "================================================="
-echo "Setup complete! Please restart your terminal."
+echo "Setup complete! Please completely close this terminal and open a new one."
 echo "Once Tmux opens, press 'Ctrl+Space' then 'Shift+I' to install your plugins."
 echo "================================================="
