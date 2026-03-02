@@ -9,6 +9,7 @@ font pango:JetBrainsMono Nerd Font 10
 # --- Core Executables ---
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
+
 # Ensures terminal transparency (requires picom installed via setup.sh)
 exec_always --no-startup-id picom -b
 
@@ -88,7 +89,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# --- UI Bar ---
 bar {
     status_command i3status
     colors {
@@ -103,3 +103,12 @@ bar {
     }
 }
 
+exec --no-startup-id /usr/bin/i3-msg 'workspace 1; exec i3-sensible-terminal'
+exec --no-startup-id /usr/bin/i3-msg 'workspace 2; exec pycharm'
+
+# Cycle through windows on the current workspace
+# bindsym $mod+Tab focus next
+# bindsym $mod+Shift+Tab focus prev
+
+# Map Alt+Tab to switch between all open windows
+bindsym $mod+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
