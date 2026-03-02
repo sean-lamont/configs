@@ -18,6 +18,15 @@ call plug#end()
 set termguicolors
 colorscheme catppuccin_mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
+" Enable syntax highlighting
+syntax on
+
+filetype plugin indent on
+
+
+" Force Vim to use 256 colors
+set t_Co=256
+
 imap jk <ESC>
 map <Enter> o<ESC>
 map <S-Enter> O<ESC>
