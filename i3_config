@@ -104,7 +104,8 @@ bar {
 }
 
 exec --no-startup-id /usr/bin/i3-msg 'workspace 1; exec i3-sensible-terminal'
-exec --no-startup-id /usr/bin/i3-msg 'workspace 2; exec pycharm'
+exec --no-startup-id /usr/bin/i3-msg 'workspace 2; exec /home/sean/.local/share/JetBrains/Toolbox/scripts/pycharm'
+exec --no-startup-id /usr/bin/i3-msg 'workspace 3; exec /usr/bin/firefox'
 
 # Cycle through windows on the current workspace
 # bindsym $mod+Tab focus next
@@ -112,3 +113,4 @@ exec --no-startup-id /usr/bin/i3-msg 'workspace 2; exec pycharm'
 
 # Map Alt+Tab to switch between all open windows
 bindsym $mod+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
+
