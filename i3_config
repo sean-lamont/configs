@@ -38,7 +38,7 @@ bindsym $mod+Shift+q kill
 # Application Launcher
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # Use Rofi instead of dmenu for a "GNOME-style" search
-bindsym $mod+space exec --no-startup-id /home/linuxbrew/.linuxbrew/bin/rofi -show drun -show-icons
+# bindsym $mod+space exec --no-startup-id /home/linuxbrew/.linuxbrew/bin/rofi -show drun -show-icons
 
 
 # --- Layout Control ---
@@ -113,5 +113,17 @@ exec --no-startup-id i3-msg 'workspace 2; exec /home/sean/.local/share/JetBrains
 # bindsym $mod+Shift+Tab focus prev
 
 # Map Alt+Tab to switch between all open windows
-bindsym $mod+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
+# bindsym $mod+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
 
+# Force Rofi to use a valid UTF-8 locale when launched via shortcut
+bindsym $mod+space exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show run
+bindsym Mod1+Tab exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show window -show-icons
+
+
+# Hide title bars but keep a 1px border
+default_border pixel 2
+default_floating_border pixel 2
+
+# If you want NO borders at all:
+# default_border pixel 0
+# default_floating_border pixel 0
