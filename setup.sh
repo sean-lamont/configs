@@ -123,6 +123,8 @@ ln -sfn "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 ln -sfn "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
 ln -sfn "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
 ln -sfn "$DOTFILES_DIR/i3_config" "$HOME/.config/i3/config"
+ln -sfn "$DOTFILES_DIR/antigravity_settings.json" "$HOME/.config/Antigravity/User/settings.json"
+ln -sfn "$DOTFILES_DIR/antigravity_keybindings.json" "$HOME/.config/Antigravity/User/keybindings.json"
 
 # --- 9. Headless Vim & Catppuccin Initialization ---
 echo "Initializing Vim and Catppuccin Theme..."

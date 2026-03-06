@@ -1,0 +1,165 @@
+[
+    // ─── Zen Mode (Ctrl+Z in IdeaVim = ToggleDistractionFreeMode) ───
+    {
+        "key": "ctrl+z",
+        "command": "workbench.action.toggleZenMode",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── Command Palette (Ctrl+A in IdeaVim = GotoAction) ───
+    {
+        "key": "ctrl+a",
+        "command": "workbench.action.showCommands",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── Hide All Side Panels (Ctrl+X in IdeaVim = HideAllWindows) ───
+    {
+        "key": "ctrl+x",
+        "command": "workbench.action.closeSidebar",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── File Structure / Go to Symbol in Editor (Ctrl+S in IdeaVim = FileStructurePopup) ───
+    {
+        "key": "ctrl+s",
+        "command": "workbench.action.gotoSymbol",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── Jump to Last Panel (Ctrl+P in IdeaVim = JumpToLastWindow) ───
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "vim.mode == 'Normal' && sideBarFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "vim.mode == 'Normal' && editorFocus"
+    },
+    // ─── Split Management ───
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.splitEditorRight",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "workbench.action.splitEditorDown",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    {
+        "key": "ctrl+-",
+        "command": "workbench.action.closeEditorsInGroup",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "workbench.action.moveEditorToNextGroup",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── Terminal Toggle (Ctrl+T in IdeaVim = ActivateTerminalToolWindow) ───
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    // ─── Recent Files (Ctrl+R in IdeaVim = RecentFiles) ───
+    {
+        "key": "ctrl+r",
+        "command": "workbench.action.quickOpen",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual'"
+    },
+    // ─── Alt+1 → Focus File Explorer (like PyCharm Alt+1 = Project) ───
+    {
+        "key": "alt+1",
+        "command": "workbench.view.explorer",
+        "when": "!sideBarFocus || activeViewlet != 'workbench.view.explorer'"
+    },
+    {
+        "key": "alt+1",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
+    },
+    // ─── Alt+0 → Focus Source Control (like PyCharm Alt+0 = Version Control) ───
+    {
+        "key": "alt+0",
+        "command": "workbench.view.scm",
+        "when": "!sideBarFocus || activeViewlet != 'workbench.view.scm'"
+    },
+    {
+        "key": "alt+0",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+    },
+    // ─── Escape in Explorer → return to editor ───
+    {
+        "key": "escape",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "sideBarFocus"
+    },
+    {
+        "key": "alt+g",
+        "command": "antigravity.toggleChatFocus",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-antigravity.toggleChatFocus",
+        "when": "!terminalFocus"
+    },
+    // ─── Agent Manager Mode: Navigate Changes (in editor) ───
+    {
+        "key": "alt+j",
+        "command": "antigravity.prioritized.agentFocusNextHunk",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+k",
+        "command": "antigravity.prioritized.agentFocusPreviousHunk",
+        "when": "editorFocus"
+    },
+    // ─── Agent Manager Mode: Accept / Reject Changes (in editor) ───
+    {
+        "key": "alt+a",
+        "command": "antigravity.prioritized.agentAcceptFocusedHunk",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+shift+a",
+        "command": "antigravity.prioritized.agentAcceptAllInFile",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+x",
+        "command": "antigravity.prioritized.agentRejectFocusedHunk",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+shift+x",
+        "command": "antigravity.prioritized.agentRejectAllInFile",
+        "when": "editorFocus"
+    },
+    // ─── Agent: Accept / Reject All in File (Global) ───
+    {
+        "key": "ctrl+alt+a",
+        "command": "antigravity.prioritized.agentAcceptAllInFile"
+    },
+    {
+        "key": "ctrl+alt+x",
+        "command": "antigravity.prioritized.agentRejectAllInFile"
+    },
+    // ─── Disable Ctrl+Backspace cancelling agent (keep it as word-delete) ───
+    {
+        "key": "ctrl+backspace",
+        "command": "-workbench.action.chat.cancel"
+    },
+    // ─── Escape in Chat → focus editor (keep chat open) ───
+    {
+        "key": "escape",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "activeAuxiliary && !editorFocus"
+    }
+]
