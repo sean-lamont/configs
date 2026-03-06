@@ -1,3 +1,6 @@
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+
 ln -sfn "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sfn "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 ln -sfn "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
