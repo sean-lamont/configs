@@ -1,0 +1,541 @@
+{
+    "workbench.colorTheme": "Tokyo Night",
+    // ─── Editor Settings ───
+    "editor.lineNumbers": "relative",
+    // ─── Python Formatting (Ruff) ───
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports.ruff": "explicit"
+        }
+    },
+    // ─── Explorer / NERDTree-like Settings ───
+    "explorer.compactFolders": false,
+    "explorer.autoReveal": false,
+    // ─── VSCodeVim Settings ───
+    "vim.leader": "<space>",
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.surround": true,
+    "vim.useSystemClipboard": true,
+    "vim.timeout": 1000,
+    // Let Vim handle these keys instead of VS Code
+    "vim.handleKeys": {
+        "<C-r>": false,
+        "<C-f>": true,
+        "<C-j>": true,
+        "<C-k>": true,
+        "<C-h>": true,
+        "<C-l>": true,
+        "<C-d>": true,
+        "<C-u>": true,
+        "<C-e>": true,
+        "<C-y>": true
+    },
+    // ─── Insert Mode Keybindings ───
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    // ─── Normal Mode Keybindings ───
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // Enter / S-Enter → insert blank line below/above
+        {
+            "before": [
+                "<CR>"
+            ],
+            "commands": [
+                "editor.action.insertLineAfter"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<S-CR>"
+            ],
+            "commands": [
+                "editor.action.insertLineBefore"
+            ],
+            "silent": true
+        },
+        // Escape → clear search highlight
+        {
+            "before": [
+                "<Esc>"
+            ],
+            "commands": [
+                ":nohlsearch"
+            ]
+        },
+        // ─── Split Navigation (Ctrl+h/j/k/l) ───
+        {
+            "before": [
+                "<C-h>"
+            ],
+            "commands": [
+                "workbench.action.focusLeftGroup"
+            ]
+        },
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "commands": [
+                "workbench.action.focusRightGroup"
+            ]
+        },
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "commands": [
+                "workbench.action.focusBelowGroup"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "commands": [
+                "workbench.action.focusAboveGroup"
+            ]
+        },
+        // ─── Tab Navigation ───
+        {
+            "before": [
+                "<Tab>"
+            ],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+        {
+            "before": [
+                "<S-Tab>"
+            ],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
+        // ─── Close Tabs ───
+        {
+            "before": [
+                "<leader>",
+                "q"
+            ],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "q",
+                "a"
+            ],
+            "commands": [
+                "workbench.action.closeAllEditors"
+            ]
+        },
+        // ─── Code Folding ───
+        {
+            "before": [
+                "z",
+                "c"
+            ],
+            "commands": [
+                "editor.fold"
+            ]
+        },
+        {
+            "before": [
+                "z",
+                "o"
+            ],
+            "commands": [
+                "editor.unfold"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "z",
+                "c"
+            ],
+            "commands": [
+                "editor.foldAll"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "z",
+                "o"
+            ],
+            "commands": [
+                "editor.unfoldAll"
+            ]
+        },
+        // ─── Method Navigation ───
+        {
+            "before": [
+                "[",
+                "["
+            ],
+            "commands": [
+                "editor.action.previousSymbolHighlight"
+            ]
+        },
+        {
+            "before": [
+                "]",
+                "]"
+            ],
+            "commands": [
+                "editor.action.nextSymbolHighlight"
+            ]
+        },
+        // ─── Code Actions ───
+        {
+            "before": [
+                "<leader>",
+                "r"
+            ],
+            "commands": [
+                "editor.action.refactor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "="
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "o"
+            ],
+            "commands": [
+                "editor.action.organizeImports"
+            ]
+        },
+        // ─── Error Navigation ───
+        {
+            "before": [
+                "g",
+                "e"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "E"
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ]
+        },
+        // ─── Go To Actions ───
+        {
+            "before": [
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "t"
+            ],
+            "commands": [
+                "testing.runAtCursor"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "b"
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "f"
+            ],
+            "commands": [
+                "workbench.action.navigateForward"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "c"
+            ],
+            "commands": [
+                "workbench.action.showAllSymbols"
+            ]
+        },
+        // ─── Search / Find ───
+        {
+            "before": [
+                "<leader>",
+                "u"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.showAllSymbols"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "h"
+            ],
+            "commands": [
+                "references-view.showCallHierarchy"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "commands": [
+                "breadcrumbs.focusAndSelect"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l"
+            ],
+            "commands": [
+                "workbench.action.navigateToLastEditLocation"
+            ]
+        },
+        // ─── Run ───
+        {
+            "before": [
+                ",",
+                "r"
+            ],
+            "commands": [
+                "workbench.action.debug.run"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "c"
+            ],
+            "commands": [
+                "testing.runAtCursor"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.output.toggleOutput"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "u"
+            ],
+            "commands": [
+                "workbench.action.debug.restart"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "f"
+            ],
+            "commands": [
+                "testing.reRunFailTests"
+            ]
+        },
+        // ─── Debugger ───
+        {
+            "before": [
+                ",",
+                "b"
+            ],
+            "commands": [
+                "editor.debug.action.toggleBreakpoint"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "d"
+            ],
+            "commands": [
+                "workbench.action.debug.start"
+            ]
+        },
+        {
+            "before": [
+                ",",
+                "n"
+            ],
+            "commands": [
+                "workbench.view.debug"
+            ]
+        },
+        // ─── Scrolling ───
+        {
+            "before": [
+                "<C-d>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-u>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "<C-e>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "<C-e>"
+            ]
+        },
+        {
+            "before": [
+                "<C-y>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "<C-y>"
+            ]
+        },
+        // ─── Recent Files ───
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        // ─── Open settings ───
+        {
+            "before": [
+                "\\",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.openSettingsJson"
+            ]
+        }
+    ],
+    // ─── Visual Mode Keybindings ───
+    "vim.visualModeKeyBindingsNonRecursive": [
+        // Preserve selection on indent/outdent
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ],
+            "silent": true
+        },
+        // Scrolling in visual mode
+        {
+            "before": [
+                "<C-d>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-u>"
+            ],
+            "after": [
+                "1",
+                "0",
+                "k"
+            ]
+        }
+    ],
+    "python.languageServer": "Default"
+}
