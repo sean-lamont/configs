@@ -10,7 +10,6 @@ echo "Checking System-Level Packages..."
 if [ "$OS" == "linux" ]; then
     if command -v apt-get &>/dev/null; then
         sudo apt-get update
-        # Use APT for X11/GUI tools to ensure they hook into the OS correctly
         sudo apt-get install -y i3 rofi feh xclip wl-clipboard jq unzip curl wget git build-essential
     else
         echo "Warning: apt-get not found. Ensure you have i3 and GUI tools installed manually."
@@ -44,7 +43,8 @@ fi
 
 # --- 3. Install Terminal Dependencies via Brew ---
 echo "Installing CLI packages via Homebrew..."
-BREW_PKGS=(zsh tmux starship mcfly neovim)
+# Removed Neovim, sticking strictly to standard tools
+BREW_PKGS=(zsh tmux starship mcfly)
 
 for pkg in "${BREW_PKGS[@]}"; do
     if ! brew list --formula | grep -q "^${pkg}\$"; then
@@ -58,7 +58,6 @@ done
 ZSH_PATH="$(command -v zsh)"
 if [ "$SHELL" != "$ZSH_PATH" ]; then
     echo "Changing default shell to Zsh..."
-    # Ensure Zsh is an allowed system shell before switching
     if ! grep -q "$ZSH_PATH" /etc/shells; then
         echo "$ZSH_PATH" | sudo tee -a /etc/shells
     fi
@@ -123,18 +122,24 @@ ln -sfn "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 ln -sfn "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
 ln -sfn "$DOTFILES_DIR/.ideavimrc" "$HOME/.ideavimrc"
 ln -sfn "$DOTFILES_DIR/i3_config" "$HOME/.config/i3/config"
+ln -sfn "$DOTFILES_DIR/.Xmodmap" "$HOME/.Xmodmap"
 
-# --- 9. Headless Vim & Catppuccin Initialization ---
-echo "Initializing Vim and Catppuccin Theme..."
-# Download vim-plug automatically if it's missing, otherwise the theme won't install
+# --- 9. Headless Vim Initialization ---
+echo "Initializing Vim and Themes..."
 if [ ! -f ~/.vim/autoload/plug.vim ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-# Install plugins (including Catppuccin) without opening UI
 vim +PlugInstall +qall
 
-# --- 10. Local Secrets Reminder ---
+# --- 10. Headless Tmux Plugin Installation ---
+echo "Initializing Tmux Plugins..."
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ~/.tmux/plugins/tpm/bin/install_plugins
+fi
+
+# --- 11. Local Secrets Reminder ---
 if [ ! -f "$HOME/.local_secrets.zsh" ]; then
     echo "CREATING: ~/.local_secrets.zsh. Please add your GITHUB_ACCESS_TOKEN here."
     touch "$HOME/.local_secrets.zsh"
@@ -145,5 +150,3 @@ echo "Setup Complete!"
 echo "1. Log out and back in to fully apply i3 and Zsh."
 echo "2. Initialize conda in your shell: ~/miniconda3/bin/conda init zsh"
 echo "================================================="
-
-

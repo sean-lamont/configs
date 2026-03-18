@@ -2,6 +2,13 @@
 # Home Row Vim Navigation (h, j, k, l)
 set $mod Mod4
 
+# --- Quality of Life & Speeds ---
+# Fast keyboard repeat rate (crucial for Vim/Tmux scrolling speed)
+exec --no-startup-id xset r rate 250 50
+
+# Workspace toggle (Pressing $mod+2 while on workspace 2 sends you to your previous workspace)
+workspace_auto_back_and_forth yes
+
 # --- Visuals & Fonts ---
 # Using the Nerd Font installed via setup.sh for proper icon rendering
 font pango:JetBrainsMono Nerd Font 10
@@ -75,6 +82,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
 
+# Quick fix to reload custom keyboard maps if they drop out
+bindsym $mod+Shift+m exec --no-startup-id xmodmap ~/.Xmodmap
+
 # --- Clean Resize Mode (Vim-style) ---
 mode "resize" {
     bindsym h resize shrink width 10 px or 10 ppt
@@ -107,7 +117,6 @@ exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 2; exec /home/sean/.local/share/JetBrains/Toolbox/scripts/pycharm'
 
-
 # Cycle through windows on the current workspace
 # bindsym $mod+Tab focus next
 # bindsym $mod+Shift+Tab focus prev
@@ -124,6 +133,18 @@ bindsym Mod1+Tab exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show window -
 default_border pixel 2
 default_floating_border pixel 2
 
-# If you want NO borders at all:
-# default_border pixel 0
-# default_floating_border pixel 0
+# remap application key to window for certain keyboards.
+exec --no-startup-id xmodmap ~/.Xmodmap
+
+# 1. The Rule: Catch the specific gnome-terminal instance, float it, and hide it immediately
+for_window [class="scratch-term"] floating enable, resize set 1000 600, move scratchpad, border pixel 2
+
+# 2. The Command: Launch gnome-terminal with that exact custom class and start tmux
+exec --no-startup-id gnome-terminal --class="scratch-term" -- tmux new-session -A -s scratch
+
+# 3. The Toggle: Summon or hide the scratchpad
+bindsym $mod+minus scratchpad show
+
+
+# Locks screen with a custom image or color
+bindsym $mod+Shift+x exec i3lock -c 000000
