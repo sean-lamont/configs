@@ -122,11 +122,11 @@ exec --no-startup-id i3-msg 'workspace 2; exec /home/sean/.local/share/JetBrains
 # bindsym $mod+Shift+Tab focus prev
 
 # Map Alt+Tab to switch between all open windows
-bindsym Mod1+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
+#bindsym Mod1+Tab exec /home/linuxbrew/.linuxbrew/bin/rofi -show window -show-icons
 
 # Force Rofi to use a valid UTF-8 locale when launched via shortcut
-# bindsym $mod+space exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show run
-# bindsym Mod1+Tab exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show window -show-icons
+bindsym $mod+space exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show run
+bindsym $mod+Tab exec --no-startup-id env LC_ALL=en_US.UTF-8 rofi -show window -show-icons
 
 
 # Hide title bars but keep a 1px border
@@ -148,3 +148,7 @@ bindsym $mod+minus scratchpad show
 
 # Locks screen with a custom image or color
 bindsym $mod+Shift+x exec i3lock -c 000000
+
+# Use Alt+Tab to switch to the last visited workspace
+bindsym Mod1+Tab workspace back_and_forth
+
